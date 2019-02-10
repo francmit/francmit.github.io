@@ -1,0 +1,25 @@
+
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+body {
+    font-family: 'Roboto', sans-serif;
+    font-size: 2rem;
+}
+
+section {
+    height: 100vh;
+    padding-top: 35vh;
+}
+
+#greeting {
+    margin: 0 auto;
+    width: 30%;
+}
+
+#greeting > p {
+   line-height: 50px;
+}
+
+#greeting > h3 {
+    font-weight: bold;
+}
