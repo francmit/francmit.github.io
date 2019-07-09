@@ -23,3 +23,39 @@ section {
 #greeting > h3 {
     font-weight: bold;
 }
+
+.nav {
+    margin: 0 auto;
+    width: 1000px;
+    display: flex;
+}
+
+.nav-wrapper {
+    margin: 0 auto;
+    padding: 45px;
+    display: flex;
+}
+
+.nav-tabs {
+    border: none;
+}
+.nav-item {
+    color: rgba(82,82,82,.7);
+    font-size: 16px;
+    margin: 18px;
+}
+
+#nav-profile-tab {
+    font-size: 48px;
+    color: #000;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+#nav-profile-tab a:hover {
+    text-decoration: none;
+}
+
+#nav-work-tab, #nav-about-tab {
+    line-height: 68px;
+}
