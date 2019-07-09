@@ -8,16 +8,7 @@ body {
 
 section {
     height: 100vh;
-    padding-top: 35vh;
-}
-
-#greeting {
-    margin: 0 auto;
-    width: 30%;
-}
-
-#greeting > p {
-   line-height: 50px;
+    padding-top: 15vh;
 }
 
 #greeting > h3 {
@@ -58,4 +49,24 @@ section {
 
 #nav-work-tab, #nav-about-tab {
     line-height: 68px;
+    text-transform: uppercase;
+}
+
+#avatar {
+    height: 500px;
+}
+
+section > div {
+    margin: 0 auto;
+    width: 50%;
+}
+
+#about {
+    width: 55%;
+    float: right;
+}
+
+#about span {
+    font-size: 14px;
+    color: grey;
 }
