@@ -3,11 +3,10 @@
 
 body {
     font-family: 'Roboto', sans-serif;
-    font-size: 2rem;
+    font-size: 1.1rem;
 }
 
-section {
-    height: 100vh;
+section, .container {
     padding-top: 15vh;
 }
 
@@ -15,13 +14,13 @@ section {
     font-weight: bold;
 }
 
-.nav {
+nav {
     margin: 0 auto;
     width: 1000px;
     display: flex;
 }
 
-.nav-wrapper {
+.nav {
     margin: 0 auto;
     padding: 45px;
     display: flex;
@@ -54,16 +53,8 @@ section {
 
 #avatar {
     height: 325px;
-}
-
-section > div {
+    display: block;
     margin: 0 auto;
-    width: 50%;
-}
-
-#about {
-    width: 55%;
-    float: right;
 }
 
 #about span {
