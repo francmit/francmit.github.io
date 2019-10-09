@@ -16,7 +16,6 @@ section, .container {
 
 nav {
     margin: 0 auto;
-    width: 1000px;
     display: flex;
 }
 
@@ -60,4 +59,21 @@ nav {
 #about span {
     font-size: 14px;
     color: grey;
+}
+
+@media screen and (max-width: 900px) {
+    #nav-profile-tab {
+        font-size: 32px;
+        color: #000;
+        font-weight: 700;
+        text-decoration: none;
+        text-align: center;
+        width: 100%;
+        order: -1;
+    }
+
+    .nav .nav-link {
+        margin: 0 auto;
+    }
+
 }
