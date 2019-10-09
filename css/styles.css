@@ -54,6 +54,7 @@ nav {
     height: 325px;
     display: block;
     margin: 0 auto;
+    margin-bottom: 75px;
 }
 
 #about span {
@@ -76,4 +77,7 @@ nav {
         margin: 0 auto;
     }
 
+    section, .container {
+        padding-top: 0;
+    }
 }
