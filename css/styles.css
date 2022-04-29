@@ -10,10 +10,6 @@ section, .container {
     padding-top: 15vh;
 }
 
-#greeting > h3 {
-    font-weight: bold;
-}
-
 nav {
     margin: 0 auto;
     display: flex;
@@ -28,56 +24,9 @@ nav {
 .nav-tabs {
     border: none;
 }
+
 .nav-item {
     color: rgba(82,82,82,.7);
     font-size: 16px;
     margin: 18px;
-}
-
-#nav-profile-tab {
-    font-size: 48px;
-    color: #000;
-    font-weight: 700;
-    text-decoration: none;
-}
-
-#nav-profile-tab a:hover {
-    text-decoration: none;
-}
-
-#nav-work-tab, #nav-about-tab {
-    line-height: 68px;
-    text-transform: uppercase;
-}
-
-#avatar {
-    height: 325px;
-    display: block;
-    margin: 0 auto;
-    margin-bottom: 75px;
-}
-
-#about span {
-    font-size: 14px;
-    color: grey;
-}
-
-@media screen and (max-width: 900px) {
-    #nav-profile-tab {
-        font-size: 32px;
-        color: #000;
-        font-weight: 700;
-        text-decoration: none;
-        text-align: center;
-        width: 100%;
-        order: -1;
-    }
-
-    .nav .nav-link {
-        margin: 0 auto;
-    }
-
-    section, .container {
-        padding-top: 0;
-    }
 }
