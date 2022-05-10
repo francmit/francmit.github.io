@@ -45,7 +45,7 @@ nav {
     display: block;
     color: #ffffff;
     font-family: "Mindline Script Demo", monospace;
-    font-size: 15rem;
+    font-size: 7rem;
     font-weight: 600;
     letter-spacing: 1rem;
 }
@@ -53,3 +53,19 @@ nav {
 .col-3 {
     padding-bottom: 75px;
 }
+
+@media screen and (min-width: 1400px) {
+    .heading-primary  {
+        font-size: 10rem;
+    }
+  }
+  @media screen and (min-width: 1600px) {
+    .heading-primary  {
+        font-size: 12rem;
+    }
+  }
+  @media screen and (min-width: 1900px) {
+    .heading-primary  {
+        font-size: 15rem;
+    }
+  }
