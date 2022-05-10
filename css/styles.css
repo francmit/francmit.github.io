@@ -1,9 +1,15 @@
 
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 
+@font-face {
+    font-family: "Mindline Script Demo";
+    src: url('Mindline Script Demo.ttf');
+}
+
 body {
     font-family: 'Roboto', sans-serif;
     font-size: 1.1rem;
+    background-color: rgb(139, 153, 165);
 }
 
 section, .container {
@@ -33,4 +39,13 @@ nav {
 
 .row {
     margin-bottom: 50px;
+}
+
+.heading-primary {
+    display: block;
+    color: #ffffff;
+    font-family: "Mindline Script Demo", monospace;
+    font-size: 15rem;
+    font-weight: 600;
+    letter-spacing: 1rem;
 }
