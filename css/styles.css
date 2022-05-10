@@ -37,7 +37,7 @@ nav {
     margin: 18px;
 }
 
-.row {
+#nav-home .row, #nav-wedding-party .row {
     margin-bottom: 50px;
 }
 
@@ -48,4 +48,8 @@ nav {
     font-size: 15rem;
     font-weight: 600;
     letter-spacing: 1rem;
+}
+
+.col-3 {
+    padding-bottom: 75px;
 }
