@@ -2,8 +2,8 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 
 @font-face {
-    font-family: "Mindline Script Demo";
-    src: url('Mindline Script Demo.ttf');
+    font-family: "Mettalian";
+    src: url('mettalian.ttf');
 }
 
 body {
@@ -44,10 +44,8 @@ nav {
 .heading-primary {
     display: block;
     color: #ffffff;
-    font-family: "Mindline Script Demo", monospace;
+    font-family: "Mettalian", monospace;
     font-size: 7rem;
-    font-weight: 600;
-    letter-spacing: 1rem;
 }
 
 .col-3 {
