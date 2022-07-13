@@ -5,6 +5,11 @@
     font-family: "Mettalian";
     src: url('mettalian.ttf');
 }
+.centered {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
 body {
     font-family: 'Roboto', sans-serif;
