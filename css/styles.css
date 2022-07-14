@@ -5,6 +5,10 @@
     font-family: "Mettalian";
     src: url('mettalian.ttf');
 }
+
+#nav-questions .row {
+  padding: 50px 0px;
+}
 .centered {
   display: flex;
   align-items: center;
