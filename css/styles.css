@@ -6,6 +6,18 @@
     src: url('mettalian.ttf');
 }
 
+.reveal{
+  position: relative;
+  transform: translateY(150px);
+  opacity: 0;
+  transition: 1s all ease;
+}
+
+.reveal.active{
+  transform: translateY(0);
+  opacity: 1;
+}
+
 #nav-questions .row {
   padding: 50px 0px;
 }
