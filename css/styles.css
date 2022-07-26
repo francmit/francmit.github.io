@@ -8,7 +8,11 @@
   font-family: "Baskvill Old Face";
   src: url('baskvill.ttf');
 }
-
+.home-page-hero {
+  height: 700px;
+  background-image: url("/images/banner.jpg");
+  width: 100%;
+}
 .reveal{
   position: relative;
   transform: translateY(150px);
