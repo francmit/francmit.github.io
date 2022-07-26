@@ -23,19 +23,33 @@
  function authenticate(fname, lname) {
     get(child(dbRef, `guests/`)).then((snapshot) => {
         if (snapshot.exists()) {
+            let authSuceeded = false;
             snapshot.val().forEach(function(g) {
-                if (g.firstName == fname && g.lastName == lname) {
+                if (g.firstName.toLowerCase() == fname.toLowerCase() && g.lastName.toLowerCase() == lname.toLowerCase()) {
                     loadRSVP(snapshot.val(), g);
+                    authSuceeded = true;
                 }
             })
-        } else {
-            console.log("No data available");
+            if (authSuceeded) {
+                document.querySelector("#nav-rsvp").querySelector('form').remove();
+                document.querySelector("#submitRsvp").classList.remove('d-none');
+                document.querySelector('.alert').classList.add('d-none');
+            } else {
+                if (!(fname || lname)) {
+                    document.querySelector('.alert').innerText = "Please enter both your first and last name to locate your invitation!";
+                } else if (!lname) {
+                    document.querySelector('.alert').innerText = "Please enter your last name to locate your invitation!";
+                } else if (!(fname)) {
+                    document.querySelector('.alert').innerText = "Please enter  your first name to locate your invitation!";
+                } else {
+                    document.querySelector('.alert').innerText = "Unable to locate invitation. Please ensure first and last name are spelled correctly and try again.";
+                }
+                document.querySelector('.alert').classList.remove('d-none');
+            }
         }
         }).catch((error) => {
             console.error(error);
         });
-    document.querySelector("#nav-rsvp").querySelector('form').remove();
-    document.querySelector("#submitRsvp").classList.remove('d-none');
     
     }
 
