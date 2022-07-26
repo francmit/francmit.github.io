@@ -1,9 +1,12 @@
 
-@import url('https://fonts.googleapis.com/css?family=Roboto');
-
 @font-face {
     font-family: "Mettalian";
     src: url('mettalian.ttf');
+}
+
+@font-face {
+  font-family: "Baskvill Old Face";
+  src: url('baskvill.ttf');
 }
 
 .reveal{
@@ -28,11 +31,15 @@
 }
 
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Baskvill Old Face', sans-serif;
     font-size: 1.1rem;
     background-color: rgb(139, 153, 165);
+    color: white;
 }
 
+.timeline {
+  color:black;
+}
 section, .container {
     padding-top: 0vh;
 }
