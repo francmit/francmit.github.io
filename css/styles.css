@@ -29,9 +29,6 @@ hr {
   opacity: 1;
 }
 
-#nav-questions .row {
-  padding: 50px 0px;
-}
 .centered {
   display: flex;
   align-items: center;
@@ -71,6 +68,25 @@ nav {
     display: flex;
 }
 
+#nav-questions .row {
+  display: table-row;
+}
+
+#nav-questions {
+  font-size: 1.2rem;
+}
+
+#nav-questions .col-4 {
+  display: table-cell;
+  vertical-align: middle;
+  padding-bottom: 80px;
+}
+
+
+#nav-questions span {
+  font-size: 1.75rem;
+  font-weight: bold;
+}
 .nav {
     margin: 0 auto;
     padding: 45px;
