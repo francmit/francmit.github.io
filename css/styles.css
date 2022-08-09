@@ -59,8 +59,17 @@ body {
   font-size: 1.2rem;
 }
 
+#nav-registry a {
+  width: 100%;
+  height: 5rem;
+  background-color: #f4f4f4;
+  margin-bottom: 1rem;
+  border-radius: .4rem;
+}
+
 section, .container {
     padding-top: 0vh;
+    height: 100vh;
 }
 
 nav {
