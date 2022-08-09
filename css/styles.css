@@ -94,7 +94,20 @@ nav {
     margin-bottom: 50px;
 }
 
-#nav-schedule .heading-secondary {
+#nav-wedding-party .row h1 {
+  font-size: 2.5rem;
+}
+
+#nav-wedding-party .row h2 {
+  font-size: 1.75rem;
+  font-style: italic;
+}
+
+#nav-wedding-party .row p {
+  font-size: 1.2rem;
+}
+
+#nav-schedule .heading-secondary, #nav-wedding-party .heading-secondary {
   margin-bottom:-60px;
 }
 
