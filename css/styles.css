@@ -8,6 +8,10 @@
   font-family: "Baskvill Old Face";
   src: url('baskvill.ttf');
 }
+
+hr {
+  border-color: white;
+}
 .home-page-hero {
   height: 700px;
   background-image: url("/images/banner.jpg");
@@ -77,6 +81,9 @@ nav {
     border: none;
 }
 
+#nav-schedule .col {
+  margin-bottom: 50px;
+}
 .nav-item {
     color: rgba(82,82,82,.7);
     font-size: 24px;
@@ -85,6 +92,10 @@ nav {
 
 #nav-home .row, #nav-wedding-party .row {
     margin-bottom: 50px;
+}
+
+#nav-schedule .heading-secondary {
+  margin-bottom:-60px;
 }
 
 .heading-primary {
@@ -100,6 +111,20 @@ nav {
     color: #ffffff;
     font-family: "Mettalian", monospace;
     font-size: 9rem;
+}
+
+#nav-schedule h3 {
+  font-size: 2.5rem;
+}
+#nav-schedule h4 {
+  font-size: 1.2rem;
+}
+
+#nav-schedule .col .h1 {
+  font-size: 2.5rem;
+}
+#nav-schedule .col p {
+  font-size: 1.2rem;
 }
 
 .col-3 {
