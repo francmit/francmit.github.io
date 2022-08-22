@@ -24,10 +24,11 @@
     get(child(dbRef, `guests/`)).then((snapshot) => {
         if (snapshot.exists()) {
             let authSuceeded = false;
-            snapshot.val().forEach(function(g) {
+            snapshot.val().forEach(function(g, index) {
                 if (g.firstName.toLowerCase() == fname.toLowerCase() && g.lastName.toLowerCase() == lname.toLowerCase()) {
                     loadRSVP(snapshot.val(), g);
                     authSuceeded = true;
+                    logGuestRSVPVisit(index);
                 }
             })
             if (authSuceeded) {
@@ -52,6 +53,18 @@
         });
     
     }
+
+function logGuestRSVPVisit(index) {
+    update(ref(db, 'guests/' + index), {
+        hasCheckedRSVP: true
+      })
+      .then(() => {
+        // Data saved successfully!
+      })
+      .catch((error) => {
+        // The write failed...
+      });
+}
 
 function loadRSVP(db, user) {
     let guestGroup = [];
@@ -91,11 +104,14 @@ function loadRSVP(db, user) {
         inputDecline.setAttribute('id', g.firstName+g.lastName+"2");
         labelDecline.innerText = "Declined";
 
-        if (g.rsvp) {
-            labelAccept.classList.add('active');
-        } else {
-            labelDecline.classList.add('active');
+        if (g.rsvp !== "") {
+            if (g.rsvp) {
+                labelAccept.classList.add('active');
+            } else {
+                labelDecline.classList.add('active');
+            }
         }
+
 
         labelAccept.append(inputAccept);
         labelDecline.append(inputDecline);
