@@ -118,6 +118,8 @@ nav {
     margin: 18px;
 }
 
+
+
 #nav-home .row, #nav-wedding-party .row {
     margin-bottom: 50px;
 }
@@ -166,10 +168,6 @@ nav {
 }
 #nav-schedule .col p {
   font-size: 1.2rem;
-}
-
-.col-3 {
-    padding-bottom: 75px;
 }
 
 /* The actual timeline (the vertical ruler) */

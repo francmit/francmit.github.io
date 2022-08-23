@@ -33,7 +33,6 @@
             })
             if (authSuceeded) {
                 document.querySelector("#nav-rsvp").querySelector('form').remove();
-                document.querySelector("#submitRsvp").classList.remove('d-none');
                 document.querySelector('.alert').classList.add('d-none');
             } else {
                 if (!(fname || lname)) {
@@ -82,9 +81,9 @@ function loadRSVP(db, user) {
         let divRow = document.createElement('div');
         divRow.classList.add('row');
         let divCol4First = document.createElement('div');
-        divCol4First.classList.add('col-4');
+        divCol4First.classList.add('col-3');
         let divCol4Second = document.createElement('div');
-        divCol4Second.classList.add('col-4');
+        divCol4Second.classList.add('col-3');
         let divName = document.createElement('div');
         divName.classList.add('col-2');
         divName.innerText = g.firstName + " " + g.lastName;
@@ -102,7 +101,27 @@ function loadRSVP(db, user) {
         let inputDecline = document.createElement('input');
         inputDecline.setAttribute('type', 'radio');
         inputDecline.setAttribute('id', g.firstName+g.lastName+"2");
-        labelDecline.innerText = "Declined";
+        labelDecline.innerText = "Decline";
+        let inputDietCheckbox = document.createElement('input');
+        inputDietCheckbox.setAttribute('type', 'checkbox');
+        inputDietCheckbox.id = g.firstName.replace(/\s+/g, '').toLowerCase() + g.lastName.replace(/\s+/g, '').toLowerCase();
+        inputDietCheckbox.onclick = function () {
+            document.getElementById(g.firstName.replace(/\s+/g, '').toLowerCase() + g.lastName.replace(/\s+/g, '').toLowerCase() + "input").classList.toggle('d-none');
+        }
+        let labelDietCheckbox = document.createElement('label');
+        labelDietCheckbox.innerText = "Diet Restrictions?";
+        let divDietCheckbox = document.createElement('div');
+        divDietCheckbox.classList.add('col-2');
+        let dietInput = document.createElement('input');
+        dietInput.setAttribute('type', 'text');
+        dietInput.classList.add('d-none');
+        dietInput.id = g.firstName.replace(/\s+/g, '').toLowerCase() + g.lastName.replace(/\s+/g, '').toLowerCase() + "input";
+
+        if (g.dietaryNeeds !== "") {
+            dietInput.value= g.dietaryNeeds; 
+        } else {
+            dietInput.setAttribute('placeholder', "E.g., allergies, no gluten");
+        }
 
         if (g.rsvp !== "") {
             if (g.rsvp) {
@@ -117,23 +136,47 @@ function loadRSVP(db, user) {
         labelDecline.append(inputDecline);
         divRsvp.append(labelAccept);
         divRsvp.append(labelDecline);
+        divDietCheckbox.append(inputDietCheckbox);
+        divDietCheckbox.append(labelDietCheckbox);
         divRow.append(divCol4First);
         divRow.append(divName);
         divRow.append(divRsvp);
+        divRow.append(divDietCheckbox);
         divRow.append(divCol4Second);
         document.querySelector("#nav-rsvp").querySelector(".container").append(divRow);
-        document.querySelector("#submitRsvp").onclick = function () {
-            updateRsvp(guestGroupKeys);
-        }
+        document.querySelector("#nav-rsvp").querySelector(".container").append(dietInput);
     });
+    let submitButton = document.createElement('button');
+    submitButton.setAttribute('type', 'button');
+    submitButton.id = "submitRsvp";
+    submitButton.classList.add('btn', 'btn-primary', 'mb-2', 'mt-4');
+    submitButton.innerText = "Submit RSVP";
+
+    submitButton.onclick = function () {
+        updateRsvp(guestGroupKeys);
+        if (guestGroup.length > 1) {
+            document.querySelector('.alert').innerText = "Thank you " + user.firstName + "! Your responses have been received.";
+        } else {
+            document.querySelector('.alert').innerText = "Thank you " + user.firstName + "! Your response has been received.";
+        }
+        document.querySelector('.alert').classList.remove('d-none');
+    }
+    document.querySelector("#nav-rsvp").querySelector(".container").append(document.createElement('br'));
+    document.querySelector("#nav-rsvp").querySelector(".container").append(submitButton);
 }
 
 function updateRsvp(keys) {
     let selections = document.querySelector("#nav-rsvp").querySelector(".container").querySelectorAll('.active');
+    let guestDiets = document.querySelector("#nav-rsvp").querySelector(".container").querySelectorAll('input[type=checkbox]');
     keys.forEach(function(g, index) {
         let rsvpValue = selections[index].classList.contains('btn-outline-primary');
+        let dietaryNeedsValue = "";
+        if (guestDiets[index].checked) {
+            dietaryNeedsValue = document.querySelector("#nav-rsvp").querySelector(".container").querySelectorAll('input[type=text]')[index].value;
+        }
         update(ref(db, 'guests/' + g), {
-            rsvp: rsvpValue
+            rsvp: rsvpValue,
+            dietaryNeeds: dietaryNeedsValue
           })
           .then(() => {
             // Data saved successfully!
