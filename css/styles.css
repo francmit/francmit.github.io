@@ -80,6 +80,18 @@ nav {
     display: flex;
 }
 
+@media only screen and (max-width: 600px) {
+  #nav-questions .answer {
+    font-size: 1rem;
+  }
+  #nav-questions .question {
+    font-size: 1rem !important;
+  }
+  #nav-questions .row {
+    display: block !important;
+  }
+}
+
 #nav-questions .row {
   display: table-row;
 }
@@ -95,7 +107,7 @@ nav {
 }
 
 
-#nav-questions span {
+#nav-questions .question {
   font-size: 1.75rem;
   font-weight: bold;
 }
@@ -118,7 +130,7 @@ nav {
 }
 .nav-item {
     color: rgba(82,82,82,.7);
-    font-size: 24px;
+    font-size: 1.35rem;
     margin: 18px;
 }
 
@@ -145,7 +157,7 @@ nav {
     display: block;
     color: #ffffff;
     font-family: "Mettalian", monospace;
-    font-size: 7rem;
+    font-size: 10rem;
     margin-bottom: -50px;
 }
 
@@ -153,7 +165,7 @@ nav {
     display: block;
     color: #ffffff;
     font-family: "Mettalian", monospace;
-    font-size: 9rem;
+    font-size: 8rem;
 }
 
 #nav-schedule h3 {

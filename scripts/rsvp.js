@@ -81,14 +81,14 @@ function loadRSVP(db, user) {
         let divRow = document.createElement('div');
         divRow.classList.add('row');
         let divCol4First = document.createElement('div');
-        divCol4First.classList.add('col-3');
+        divCol4First.classList.add('col-md-3','d-none', 'd-md-block');
         let divCol4Second = document.createElement('div');
-        divCol4Second.classList.add('col-3');
+        divCol4Second.classList.add('col-md-3', 'd-none', 'd-md-block');
         let divName = document.createElement('div');
-        divName.classList.add('col-2');
+        divName.classList.add('col-md-2','col-sm-4');
         divName.innerText = g.firstName + " " + g.lastName;
         let divRsvp = document.createElement('div');
-        divRsvp.classList.add('col-2', 'btn-group', 'btn-group-toggle');
+        divRsvp.classList.add('col-md-2', 'col-sm-4', 'btn-group', 'btn-group-toggle');
         divRsvp.setAttribute('data-toggle', 'buttons');
         let labelAccept = document.createElement('label');
         labelAccept.classList.add('btn', 'btn-outline-primary');
@@ -111,7 +111,7 @@ function loadRSVP(db, user) {
         let labelDietCheckbox = document.createElement('label');
         labelDietCheckbox.innerText = "Diet Restrictions?";
         let divDietCheckbox = document.createElement('div');
-        divDietCheckbox.classList.add('col-2');
+        divDietCheckbox.classList.add('col-md-2', 'col-sm-4');
         let dietInput = document.createElement('input');
         dietInput.setAttribute('type', 'text');
         dietInput.classList.add('d-none');
