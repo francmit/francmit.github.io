@@ -65,6 +65,14 @@ function logGuestRSVPVisit(index) {
       });
 }
 
+function createElementHelper(el, css) {
+    let element = document.createElement(el);
+    css.forEach(function(c) {
+        element.classList.add(c);
+    });
+    return element;
+}
+
 function loadRSVP(db, user) {
     let guestGroup = [];
     let guestGroupKeys = [];
@@ -75,81 +83,15 @@ function loadRSVP(db, user) {
             guestGroup.push(g);
             guestGroupKeys.push(index);
         }
-    })
+    });
 
     guestGroup.forEach(function(g) {
-        let divRow = document.createElement('div');
-        divRow.classList.add('row');
-        let divCol4First = document.createElement('div');
-        divCol4First.classList.add('col-md-3','d-none', 'd-md-block');
-        let divCol4Second = document.createElement('div');
-        divCol4Second.classList.add('col-md-3', 'd-none', 'd-md-block');
-        let divName = document.createElement('div');
-        divName.classList.add('col-md-2','col-sm-4');
-        divName.innerText = g.firstName + " " + g.lastName;
-        let divRsvp = document.createElement('div');
-        divRsvp.classList.add('col-md-2', 'col-sm-4', 'btn-group', 'btn-group-toggle');
-        divRsvp.setAttribute('data-toggle', 'buttons');
-        let labelAccept = document.createElement('label');
-        labelAccept.classList.add('btn', 'btn-outline-primary');
-        let labelDecline = document.createElement('label');
-        labelDecline.classList.add('btn', 'btn-outline-secondary');
-        let inputAccept = document.createElement('input');
-        inputAccept.setAttribute('type', 'radio');
-        inputAccept.setAttribute('id', g.firstName+g.lastName+"1");
-        labelAccept.innerText = "Accept";
-        let inputDecline = document.createElement('input');
-        inputDecline.setAttribute('type', 'radio');
-        inputDecline.setAttribute('id', g.firstName+g.lastName+"2");
-        labelDecline.innerText = "Decline";
-        let inputDietCheckbox = document.createElement('input');
-        inputDietCheckbox.setAttribute('type', 'checkbox');
-        inputDietCheckbox.id = g.firstName.replace(/\s+/g, '').toLowerCase() + g.lastName.replace(/\s+/g, '').toLowerCase();
-        inputDietCheckbox.onclick = function () {
-            document.getElementById(g.firstName.replace(/\s+/g, '').toLowerCase() + g.lastName.replace(/\s+/g, '').toLowerCase() + "input").classList.toggle('d-none');
-        }
-        let labelDietCheckbox = document.createElement('label');
-        labelDietCheckbox.innerText = "Diet Restrictions?";
-        let divDietCheckbox = document.createElement('div');
-        divDietCheckbox.classList.add('col-md-2', 'col-sm-4');
-        let dietInput = document.createElement('input');
-        dietInput.setAttribute('type', 'text');
-        dietInput.classList.add('d-none');
-        dietInput.id = g.firstName.replace(/\s+/g, '').toLowerCase() + g.lastName.replace(/\s+/g, '').toLowerCase() + "input";
-
-        if (g.dietaryNeeds !== "") {
-            dietInput.value= g.dietaryNeeds; 
-        } else {
-            dietInput.setAttribute('placeholder', "E.g., allergies, no gluten");
-        }
-
-        if (g.rsvp !== "") {
-            if (g.rsvp) {
-                labelAccept.classList.add('active');
-            } else {
-                labelDecline.classList.add('active');
-            }
-        }
-
-
-        labelAccept.append(inputAccept);
-        labelDecline.append(inputDecline);
-        divRsvp.append(labelAccept);
-        divRsvp.append(labelDecline);
-        divDietCheckbox.append(inputDietCheckbox);
-        divDietCheckbox.append(labelDietCheckbox);
-        divRow.append(divCol4First);
-        divRow.append(divName);
-        divRow.append(divRsvp);
-        divRow.append(divDietCheckbox);
-        divRow.append(divCol4Second);
-        document.querySelector("#nav-rsvp").querySelector(".container").append(divRow);
-        document.querySelector("#nav-rsvp").querySelector(".container").append(dietInput);
+        loadGuestRsvpRow(g);
     });
-    let submitButton = document.createElement('button');
+
+    let submitButton = createElementHelper('button', ['btn', 'btn-primary', 'mb-2', 'mt-4']);
     submitButton.setAttribute('type', 'button');
     submitButton.id = "submitRsvp";
-    submitButton.classList.add('btn', 'btn-primary', 'mb-2', 'mt-4');
     submitButton.innerText = "Submit RSVP";
 
     submitButton.onclick = function () {
@@ -163,6 +105,69 @@ function loadRSVP(db, user) {
     }
     document.querySelector("#nav-rsvp").querySelector(".container").append(document.createElement('br'));
     document.querySelector("#nav-rsvp").querySelector(".container").append(submitButton);
+}
+
+function loadGuestRsvpRow(g) {
+    let divRow = createElementHelper('div', ['row']);
+    let divCol4First = createElementHelper('div', ['col-md-3','d-none', 'd-md-block']);
+    let divCol4Second = createElementHelper('div', ['col-md-3','d-none', 'd-md-block']);
+    let divName = createElementHelper('div', ['col-md-2','col-sm-4']);
+    let divRsvp = createElementHelper('div', ['col-md-2', 'col-sm-4', 'btn-group', 'btn-group-toggle']);
+    let labelAccept = createElementHelper('label', ['btn', 'btn-outline-primary']);
+    let labelDecline = createElementHelper('label', ['btn', 'btn-outline-secondary']);
+    let inputAccept = document.createElement('input');
+    let inputDecline = document.createElement('input');
+    let inputDietCheckbox = document.createElement('input');
+    let labelDietCheckbox = document.createElement('label');
+    let divDietCheckbox = createElementHelper('div', ['col-md-2', 'col-sm-4']);
+    let dietInput = createElementHelper('input', ['d-none']);
+
+    divRsvp.setAttribute('data-toggle', 'buttons');
+    inputAccept.setAttribute('type', 'radio');
+    inputAccept.setAttribute('id', g.firstName+g.lastName+"1");
+    inputDecline.setAttribute('type', 'radio');
+    inputDecline.setAttribute('id', g.firstName+g.lastName+"2");
+    inputDietCheckbox.setAttribute('type', 'checkbox');
+    dietInput.setAttribute('type', 'text');
+
+    divName.innerText = g.firstName + " " + g.lastName;
+    labelAccept.innerText = "Accept";
+    labelDecline.innerText = "Decline";
+    labelDietCheckbox.innerText = "Diet Restrictions?";
+
+    inputDietCheckbox.id = g.firstName.replace(/\s+/g, '').toLowerCase() + g.lastName.replace(/\s+/g, '').toLowerCase();
+    dietInput.id = g.firstName.replace(/\s+/g, '').toLowerCase() + g.lastName.replace(/\s+/g, '').toLowerCase() + "input";
+    inputDietCheckbox.onclick = function () {
+        document.getElementById(g.firstName.replace(/\s+/g, '').toLowerCase() + g.lastName.replace(/\s+/g, '').toLowerCase() + "input").classList.toggle('d-none');
+    }
+
+    if (g.dietaryNeeds !== "") {
+        dietInput.value= g.dietaryNeeds; 
+    } else {
+        dietInput.setAttribute('placeholder', "E.g., allergies, no gluten");
+    }
+
+    if (g.rsvp !== "") {
+        if (g.rsvp) {
+            labelAccept.classList.add('active');
+        } else {
+            labelDecline.classList.add('active');
+        }
+    }
+
+    labelAccept.append(inputAccept);
+    labelDecline.append(inputDecline);
+    divRsvp.append(labelAccept);
+    divRsvp.append(labelDecline);
+    divDietCheckbox.append(inputDietCheckbox);
+    divDietCheckbox.append(labelDietCheckbox);
+    divRow.append(divCol4First);
+    divRow.append(divName);
+    divRow.append(divRsvp);
+    divRow.append(divDietCheckbox);
+    divRow.append(divCol4Second);
+    document.querySelector("#nav-rsvp").querySelector(".container").append(divRow);
+    document.querySelector("#nav-rsvp").querySelector(".container").append(dietInput);
 }
 
 function updateRsvp(keys) {
