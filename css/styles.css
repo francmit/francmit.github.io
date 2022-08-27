@@ -109,6 +109,10 @@ nav {
     border: none;
 }
 
+.flower-boquet {
+  margin-top: -60px;
+  width: 250px;
+}
 #nav-schedule .col {
   margin-bottom: 50px;
 }
@@ -135,10 +139,6 @@ nav {
 
 #nav-wedding-party .row p {
   font-size: 1.2rem;
-}
-
-.heading-secondary {
-  margin-bottom:-60px;
 }
 
 .heading-primary {
