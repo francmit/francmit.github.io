@@ -150,8 +150,10 @@ function loadGuestRsvpRow(g) {
     if (g.rsvp !== "") {
         if (g.rsvp) {
             labelAccept.classList.add('active');
+            labelAccept.innerText = "Accepted";
         } else {
             labelDecline.classList.add('active');
+            labelDecline.innerText = "Declined";
         }
     }
 
