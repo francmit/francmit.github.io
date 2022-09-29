@@ -9,6 +9,62 @@
   src: url('baskvill.ttf');
 }
 
+@keyframes fadein {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Firefox < 16 */
+@-moz-keyframes fadein {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes fadein {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Internet Explorer */
+@-ms-keyframes fadein {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.first-met:hover {
+  background-image: url("../images/home-tab/first-met.JPG");
+}
+.dating:hover {
+  background-image: url("../images/home-tab/started-dating.JPG");
+}
+.ldr:hover {
+  background-image: url("../images/home-tab/japan-ldr.JPG");
+}
+.engaged:hover {
+  background-image: url("../images/home-tab/engaged.jpg");
+}
+
+
+.unused {
+  -webkit-animation: fadein 1.2s; /* Safari, Chrome and Opera > 12.1 */
+  -moz-animation: fadein 1.2s; /* Firefox < 16 */
+   -ms-animation: fadein 1.2s; /* Internet Explorer */
+    -o-animation: fadein 1.2s; /* Opera < 12.1 */
+       animation: fadein 1.2s;
+}
+.content:hover {
+  background-size: auto 100%;
+  background-repeat: no-repeat;
+  background-position: center; 
+  transform: rotate3d(0, 1, 0.0, 3.142rad);
+  transition: transform .75s ease-in-out;
+}
+
+.content:hover p, .content:hover h2, .content:hover h3 {
+  opacity: 0;
+}
+
 hr {
   border-color: white;
 }
@@ -28,7 +84,7 @@ hr {
   transform: translateY(0);
   opacity: 1;
 }
-
+s
 .centered {
   display: flex;
   align-items: center;
