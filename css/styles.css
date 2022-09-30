@@ -38,8 +38,6 @@
   background-size: auto 100%;
   background-repeat: no-repeat;
   background-position: center; 
-  transform: rotateY(180deg);
-  transition: transform .75s ease-in-out;
 }
 
 .content:hover p, .content:hover h2, .content:hover h3 {
