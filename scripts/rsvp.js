@@ -199,6 +199,7 @@ document.addEventListener('DOMContentLoaded', function() {
         authenticate(document.querySelector('#firstName').value , document.querySelector('#lastName').value );
     };
     window.addEventListener("scroll", reveal);
+    console.info("Hope you admire my spaghetti code website. I'd like to thank Stack Overflow, because without it, I couldn't have done this. :) \n -Mitch")
 }, false);
 
 function reveal() {
