@@ -9,55 +9,36 @@
   src: url('baskvill.ttf');
 }
 
-@keyframes fadein {
-  from { opacity: 0; }
-  to   { opacity: 1; }
+.timeline-container:hover .card {
+  transform: rotateY(180deg);
 }
 
-/* Firefox < 16 */
-@-moz-keyframes fadein {
-  from { opacity: 0; }
-  to   { opacity: 1; }
+.card {
+  transition: 0.6s;
+  transform-style: preserve-3d;
+  position: relative;
 }
 
-/* Safari, Chrome and Opera > 12.1 */
-@-webkit-keyframes fadein {
-  from { opacity: 0; }
-  to   { opacity: 1; }
+.front, .back {
+  backface-visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.front {
+  z-index: 2;
+  transform: rotateY(0deg);
 }
 
-/* Internet Explorer */
-@-ms-keyframes fadein {
-  from { opacity: 0; }
-  to   { opacity: 1; }
+.back {
+  transform: rotateY(180deg);
 }
 
-.first-met:hover {
-  background-image: url("../images/home-tab/first-met.JPG");
-}
-.dating:hover {
-  background-image: url("../images/home-tab/started-dating.JPG");
-}
-.ldr:hover {
-  background-image: url("../images/home-tab/japan-ldr.JPG");
-}
-.engaged:hover {
-  background-image: url("../images/home-tab/engaged.jpg");
-}
-
-
-.unused {
-  -webkit-animation: fadein 1.2s; /* Safari, Chrome and Opera > 12.1 */
-  -moz-animation: fadein 1.2s; /* Firefox < 16 */
-   -ms-animation: fadein 1.2s; /* Internet Explorer */
-    -o-animation: fadein 1.2s; /* Opera < 12.1 */
-       animation: fadein 1.2s;
-}
 .content:hover {
   background-size: auto 100%;
   background-repeat: no-repeat;
   background-position: center; 
-  transform: rotate3d(0, 1, 0.0, 3.142rad);
+  transform: rotateY(180deg);
   transition: transform .75s ease-in-out;
 }
 
