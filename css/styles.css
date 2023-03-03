@@ -351,15 +351,15 @@ nav {
     }
   }
 
-  @media only screen and (max-device-width: 600px) {
-    #questions .answer {
-      font-size: 1rem;
-    }
-    #questions .question {
-      font-size: 1rem !important;
-    }
-    #questions .row {
-      display: block !important;
-    }
+@media only screen and (max-width: 600px) {
+  #questions .answer {
+    font-size: 1rem;
   }
-  
+  #questions .question {
+    font-size: 1rem !important;
+  }
+  #questions .row {
+    display: block !important;
+  }
+}
+
