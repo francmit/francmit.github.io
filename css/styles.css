@@ -115,18 +115,6 @@ nav {
     display: flex;
 }
 
-@media only screen and (max-device-width: 600px) {
-  #questions .answer {
-    font-size: 1rem;
-  }
-  #questions .question {
-    font-size: 1rem !important;
-  }
-  #questions .row {
-    display: block !important;
-  }
-}
-
 #questions .row {
   display: table-row;
 }
@@ -363,3 +351,15 @@ nav {
     }
   }
 
+  @media only screen and (max-device-width: 600px) {
+    #questions .answer {
+      font-size: 1rem;
+    }
+    #questions .question {
+      font-size: 1rem !important;
+    }
+    #questions .row {
+      display: block !important;
+    }
+  }
+  
