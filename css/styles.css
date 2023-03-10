@@ -362,3 +362,9 @@ nav {
   }
 }
 
+@media screen and (max-width:767px){
+  .nav-tabs > a {
+    width:100%;
+    margin-top: 0;
+  }
+}
