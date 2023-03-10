@@ -116,7 +116,7 @@ nav {
 }
 
 #questions .row {
-  display: table-row;
+  display: block;
 }
 
 #questions {
@@ -364,8 +364,4 @@ nav {
   }
 }
 */
-
-#questions .row {
-  display: block !important;
-}
 
