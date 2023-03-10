@@ -355,6 +355,7 @@ nav {
 @media screen and (max-width: 2000px) {
   #questions .answer {
     font-size: 1rem;
+    max-width: 100%;
   }
   #questions .question {
     font-size: 1rem !important;
