@@ -32,7 +32,7 @@
                 }
             })
             if (authSuceeded) {
-                document.querySelector("#nav-rsvp").querySelector('form').remove();
+                document.querySelector("#rsvp").querySelector('form').remove();
                 document.querySelector('.alert').classList.add('d-none');
             } else {
                 if (!(fname || lname)) {
@@ -103,8 +103,8 @@ function loadRSVP(db, user) {
         }
         document.querySelector('.alert').classList.remove('d-none');
     }
-    document.querySelector("#nav-rsvp").querySelector(".container").append(document.createElement('br'));
-    document.querySelector("#nav-rsvp").querySelector(".container").append(submitButton);
+    document.querySelector("#rsvp").querySelector(".container").append(document.createElement('br'));
+    document.querySelector("#rsvp").querySelector(".container").append(submitButton);
 }
 
 function loadGuestRsvpRow(g) {
@@ -168,18 +168,18 @@ function loadGuestRsvpRow(g) {
     divRow.append(divRsvp);
     divRow.append(divDietCheckbox);
     divRow.append(divCol4Second);
-    document.querySelector("#nav-rsvp").querySelector(".container").append(divRow);
-    document.querySelector("#nav-rsvp").querySelector(".container").append(dietInput);
+    document.querySelector("#rsvp").querySelector(".container").append(divRow);
+    document.querySelector("#rsvp").querySelector(".container").append(dietInput);
 }
 
 function updateRsvp(keys) {
-    let selections = document.querySelector("#nav-rsvp").querySelector(".container").querySelectorAll('.active');
-    let guestDiets = document.querySelector("#nav-rsvp").querySelector(".container").querySelectorAll('input[type=checkbox]');
+    let selections = document.querySelector("#rsvp").querySelector(".container").querySelectorAll('.active');
+    let guestDiets = document.querySelector("#rsvp").querySelector(".container").querySelectorAll('input[type=checkbox]');
     keys.forEach(function(g, index) {
         let rsvpValue = selections[index].classList.contains('btn-outline-primary');
         let dietaryNeedsValue = "";
         if (guestDiets[index].checked) {
-            dietaryNeedsValue = document.querySelector("#nav-rsvp").querySelector(".container").querySelectorAll('input[type=text]')[index].value;
+            dietaryNeedsValue = document.querySelector("#rsvp").querySelector(".container").querySelectorAll('input[type=text]')[index].value;
         }
         update(ref(db, 'guests/' + g), {
             rsvp: rsvpValue,
