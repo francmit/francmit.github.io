@@ -34,6 +34,11 @@
             if (authSuceeded) {
                 document.querySelector("#rsvp").querySelector('form').remove();
                 document.querySelector('.alert').classList.add('d-none');
+                if (fname != "Jennifer" && fname != "Ben") {
+                    document.querySelector('.alert').innerText = "All RSVPs have been received as of 5/31/2023. If any changes to your RSVP status are needed, please contact Janine or Mitchell as soon as possible.";
+                    document.querySelector('#submitRsvp').disabled = true;
+                    document.querySelector('.alert').classList.remove('d-none');
+                }
             } else {
                 if (!(fname || lname)) {
                     document.querySelector('.alert').innerText = "Please enter both your first and last name to locate your invitation!";
