@@ -1,8 +1,18 @@
 {
     "UD-3900": {
-        "tags": ["USB Type-C to Host", "USB Type-A to Host", "HDMI Output", "Has Ethernet", "Has 3.5mm Audio", "DisplayLink", "2x Displays", "1x Display", "1080p", "Vertical"]
+        "tags": ["USB Type-C to Host", "USB Type-A to Host", "HDMI Output", "Has Ethernet", "Has 3.5mm Audio", "DisplayLink", "2x Displays", "1x Display", "1080p", "Vertical"],
+        "url": "plugable.com/products/ud-3900"
     },
     "TBT4-UDZ": {
-        "tags": ["USB Type-C to Host", "Thunderbolt to Host", "Power Delivery (Host Charging)", "HDMI Output", "Has USB-C Ports", "Has Security Slot", "Has SD Reader", "Has Ethernet", "Has 3.5mm Audio", "DisplayPort Output", "4x Displays", "4K", "3x Displays", "2x Displays", "1x Display", "1440p", "1080p"]
+        "tags": ["USB Type-C to Host", "Thunderbolt to Host", "Power Delivery (Host Charging)", "HDMI Output", "Has USB-C Ports", "Has Security Slot", "Has SD Reader", "Has Ethernet", "Has 3.5mm Audio", "DisplayPort Output", "4x Displays", "4K", "3x Displays", "2x Displays", "1x Display", "1440p", "1080p"],
+        "url": "plugable.com/products/tbt4-udz"
+    },
+    "UD-ULTC4K": {
+        "tags": ["Vertical", "USB Type-C to Host", "Power Delivery (Host Charging)", "HDMI Output", "Has USB-C Ports", "Has SD Reader", "Has Ethernet", "Has 3.5mm Audio", "DisplayPort Output", "DisplayLink", "4K", "3x Displays", "2x Displays", "1x Display", "1440p", "1080p"],
+        "url": "plugable.com/products/ud-ultc4k"
+    },
+    "UD-CA1A": {
+        "tags": ["Vertical", "USB Type-C to Host", "taa", "Power Delivery (Host Charging)", "Horizontal", "HDMI Output", "Has Ethernet", "Has 3.5mm Audio", "4K", "1x Display", "1440p", "1080p"],
+        "url": "plugable.com/products/ud-ca1a"
     }
 }
