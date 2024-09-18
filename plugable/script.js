@@ -846,7 +846,8 @@ function getNextStep(currentStep) {
 
 async function displayResults() {
     //let jsonDataSrc = "https://cdn.shopify.com/s/files/1/0006/9045/4575/files/docks.json?v=1722393540"
-    let jsonDataSrc = "https://media.plugable.com/dockfinder/data.json";
+    //let jsonDataSrc = "https://media.plugable.com/dockfinder/data.json";
+    let jsonDataSrc = "https://d2k3ryp93mcqg.cloudfront.net/dockfinder/data.json";
     let data = await getData(jsonDataSrc);
     transitionSteps("step-3", "step-4", false);
     let compatibleDockList = [];
