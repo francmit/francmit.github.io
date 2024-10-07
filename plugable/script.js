@@ -2,46 +2,205 @@
 var htmlContent = `
 <div class="container">
 <h1>Docking Station Finder</h1>
-  <h2 class="text-center">Connect <u>This</u> With <em>That</em>.</h2>
-  <div class="steps">
-    <div>
-      <span id="back" class="d-none" onclick="back()">Back</span>
+    <h2 class="text-center">Connect <u>This</u> With <em>That</em>.</h2>
+    <div class="steps">
+        <div>
+            <span id="back" class="d-none" onclick="back()">Back</span>
+        </div>
+        <div class="nav-step-1 active-step">Step 1</div>
+        <div class="nav-step-2 nav-step-2a disabled">Step 2</div>
+        <div class="nav-step-3 disabled">Step 3</div>
+        <div></div>
     </div>
-    <div class="nav-step-1 active-step fw-bolder">Step 1</div>
-    <div class="nav-step-2 nav-step-2a disabled">Step 2</div>
-    <div class="nav-step-3 disabled">Step 3</div>
-  </div>
-  <div class="step-1 active">
-    <p>Let's start with your computer. Which operating system are you using?</p>
-    <div class="card-grid">
-      <div>
-        <div class="card rounded text-center">
-          <div onclick="selectOS('windows')">
-            <p class="fw-bolder pb-2">Windows</p>
-          </div>
+    <div class="step-1 active">
+        <p>Let's start with your computer. Which operating system are you using?</p>
+        <div class="card-grid">
+            <div class="card rounded text-center">
+                <div onclick="selectOS('windows')">
+                <p class="fw-bolder pb-2">Windows</p>
+                </div>
+            </div>
+            <div class="card rounded text-center">
+                <div onclick="selectOS('macos')">
+                <p class="fw-bolder pb-2">macOS</p>
+                </div>
+            </div>
+            <div class="card rounded text-center">
+                <div onclick="selectOS('chromeos')">
+                <p class="fw-bolder pb-2">ChromeOS</p>
+                </div>
+            </div>
         </div>
-      </div>
-      <div>
-        <div class="card rounded text-center">
-          <div onclick="selectOS('macos')">
-            <p class="fw-bolder pb-2">macOS</p>
-          </div>
-        </div>
-      </div>
-      <div>
-        <div class="card rounded text-center">
-          <div onclick="selectOS('chromeos')">
-            <p class="fw-bolder pb-2">ChromeOS</p>
-          </div>
-        </div>
-      </div>
     </div>
-  </div>
+    <div class="step-2">
+        <p>Next, which port are you connecting to?</p>
+        <div class="card-grid">
+            <div class="card rounded text-center">
+                <div onclick="selectHostType('usb-type-a-to-host')">
+                    <i class="fa-4x fac fa-custom-usb3 my-5"></i>
+                    <p class="fw-bolder pb-2">USB 3.0</p>
+                </div>
+            </div>
+            <div class="card rounded text-center">
+                <div onclick="selectHostType('usb-type-c-to-host')">
+                    <i class="fa-4x fac fa-custom-usbc my-5"></i>
+                    <p class="fw-bolder pb-2">USB-C</p>
+                </div>
+            </div>
+            <div class="card rounded text-center">
+                <div onclick="selectHostType('thunderbolt-to-host')">
+                    <i class="fa-4x fac fa-custom-tbt3 my-5"></i>
+                    <p class="fw-bolder pb-2">Thunderbolt/USB4</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="step-2a">
+        <p>Since you're running macOS, can you tell me if your Mac uses Apple silicon (M1, M2, or M3) or an Intel CPU?</p>
+        <p>
+            Not sure? You can check by clicking the <strong>Apple icon</strong> at the top-left of your screen, choose
+            <strong>About This Mac</strong>, and inspecting the <strong>Processor</strong> or
+            <strong>Chip</strong> fields, or by referring to Apple's
+            <a href="https://support.apple.com/en-us/HT211814" target="_blank">support guide</a>.
+        </p>
+        <div class="card-grid">
+            <div class="card rounded text-center">
+                <div onclick="selectMacCPU('m1-m2')">
+                <p class="fw-bolder pb-2">
+                    <span style="font-size:3rem">M1, M2, M3<br>
+                    Base</span><br>
+                    Apple Silicon
+                </p>
+                </div>
+            </div>
+            <div class="card rounded text-center">
+                <div onclick="selectMacCPU('m1-pro-max')">
+                <p class="fw-bolder pb-2">
+                    <span style="font-size:3rem">M1, M2, M3<br>
+                    <span class="mx-pro">Pro</span>/<span class="mx-max">Max</span></span><br>
+                    Apple Silicon
+                </p>
+                </div>
+            </div>
+            <div class="card rounded text-center">
+                <div onclick="selectMacCPU('intel')">
+                <p class="fw-bolder pb-2">
+                    <span style="font-size:3rem">Intel<br>
+                    Core</span><br>
+                    Pre-2020 models
+                </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="step-3">
+        <p>
+            Almost there! Let's look at the display (monitor, TV, projector, etc.) you want to connect. Select which
+            video port you'd like to use, as well as any other display and feature preferences down below.
+        </p>
+        <div class="card-grid">
+            <div class="card rounded text-center" id="hdmi-output" onclick="selectVideoInput(this)">
+                <p class="fw-bolder pb-2">HDMI</p>
+            </div>
+            <div class="card rounded text-center" id="displayport-output" onclick="selectVideoInput(this)">
+                <p class="fw-bolder pb-2">DisplayPort (DP)</p>
+            </div>
+            <div class="card rounded text-center" id="dvi-output" onclick="selectVideoInput(this)">
+                <p class="fw-bolder pb-2">DVI</p>
+            </div>
+            <div class="card rounded text-center"id="vga-output" onclick="selectVideoInput(this)">
+                <p class="fw-bolder pb-2">VGA</p>
+            </div>
+            <div class="card rounded text-center" onclick="selectVideoInput(this)" id="usb-type-c-output">
+                <p class="fw-bolder pb-2">USB-C</p>
+            </div>
+        </div>
+        <form class="card-grid">
+            <div class="form-group">
+                <label for="displays">Number of Displays</label>
+                <select class="form-control mb-3" onchange="numDisplays(this)" id="displays">
+                <option hidden="" selected="" value="">Select number of displays</option>
+                <option value="">Any</option>
+                <option value="1x-display">1</option>
+                <option value="2x-displays">2</option>
+                <option value="3x-displays">3</option>
+                <option value="4x-displays" class="">4</option>
+                </select>
+                <label for="max-res">Maximum Resolution</label>
+                <select class="form-control" onchange="maxRes(this)" id="max-res">
+                <option hidden="" selected="" value="">Select maximum resolution desired</option>
+                <option value="">Any</option>
+                <option value="1080p">1080p</option>
+                <option value="1440p">1440p</option>
+                <option value="4k">4K</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Additional Features</label>
+                <div class="custom-control custom-switch">
+                <input onclick="updateFeature(this)" type="checkbox" class="custom-control-input" id="power-delivery-host-charging">
+                <label class="custom-control-label" for="power-delivery-host-charging"><i class="fas fa-fw fa-lg fa-plug"></i> Laptop Charging</label>
+                </div>
+                <div class="custom-control custom-switch">
+                <input onclick="updateFeature(this)" type="checkbox" class="custom-control-input" id="has-ethernet">
+                <label class="custom-control-label" for="has-ethernet"><i class="fac fa-fw fa-lg fa-custom-ethernet"></i> Ethernet</label>
+                </div>
+                <div class="custom-control custom-switch">
+                <input onclick="updateFeature(this)" type="checkbox" class="custom-control-input" id="has-sd-reader">
+                <label class="custom-control-label" for="has-sd-reader"><i class="fal fa-fw fa-lg fa-hdd"></i> SD Card Reader</label>
+                </div>
+                <div class="custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input" id="audio">
+                <label class="custom-control-label" for="audio"><i class="fal fa-fw fa-lg fa-headphones"></i> 3.5mm Audio</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>&nbsp;</label>
+                <div class="custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input" id="usb-a">
+                <label class="custom-control-label" for="usb-a"><i class="fac fa-fw fa-lg fa-custom-usb3"></i> USB-A Ports</label>
+                </div>
+                <div class="custom-control custom-switch">
+                <input onclick="updateFeature(this)" type="checkbox" class="custom-control-input" id="has-usb-c-ports">
+                <label class="custom-control-label" for="has-usb-c-ports"><i class="fac fa-fw fa-lg fa-custom-usbc"></i> USB-C Ports</label>
+                </div>
+                <div class="custom-control custom-switch">
+                <input onclick="updateFeature(this)" type="checkbox" class="custom-control-input" id="has-thunderbolt-ports">
+                <label class="custom-control-label" for="has-thunderbolt-ports"><i class="fac fa-fw fa-lg fa-custom-tbt3"></i> Thunderbolt ports</label>
+                </div>
+            </div>
+        </form>
+        <div class="text-center">
+            <div id="results" class="btn" onclick="displayResults()"><span class="px-2">See results</span></div>
+        </div> 
+    </div>
+    <div class="step-4">
+        <div class="loader"></div> 
+        <div class="card-grid">
+            
+        </div>
+    </div>
 </div>
 `;
 
 // Define the alternative CSS
 var alternativeCSS = `
+
+.loader {
+  border: 16px solid #FFFFFF; /* Light grey */
+  border-top: 16px solid rgb(0, 99, 65); 
+  border-radius: 50%;
+  width: 50px;
+  margin: auto;
+  height: 50px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
 .position-relative {
     position: relative !important;
   }
@@ -676,7 +835,7 @@ function selectMacCPU(model) {
         step2Values.push('displaylink');
     }
     if (macCPUModel == "m1-pro-max") {
-        step2Values.push('thunderbolt-to-host');
+        //step2Values.push('thunderbolt-to-host');
     }
 
     preventDeadEndResults();
@@ -732,7 +891,7 @@ function preventDeadEndResults() {
         document.querySelector('[value="3x-displays"]').classList.add("d-none");
         // No USB 3.0 docks with USB-C/TBT3
         document.querySelector("#has-usb-c-ports").parentElement.classList.add("d-none");
-        document.querySelector("#has-thunderbolt-3-ports").parentElement.classList.add("d-none");
+        document.querySelector("#has-thunderbolt-ports").parentElement.classList.add("d-none");
         // No USB 3.0 docks with quad output
         document.querySelector('[value="4x-displays"]').classList.add("d-none");
     }
@@ -742,7 +901,7 @@ function preventDeadEndResults() {
         // No TBT3 docks with DVI video output
         document.querySelector("#dvi-output").classList.add("d-none");
         // No USB-C docks with Thunderbolt ports
-        document.querySelector("#has-thunderbolt-3-ports").parentElement.classList.add("d-none");
+        document.querySelector("#has-thunderbolt-ports").parentElement.classList.add("d-none");
     }
     if (hostType == "thunderbolt-to-host") {
         // No TBT3 docks with VGA video output
@@ -751,11 +910,15 @@ function preventDeadEndResults() {
         document.querySelector("#dvi-output").classList.add("d-none");
     }
 
-    if (macCPUModel == "m1-pro-max") {
-        document.querySelector('[value="3x-displays"]').classList.add("d-none");
+    if (macCPUModel == "m1-pro-max" ) {
         document.querySelector("#vga-output").classList.add("d-none");
         document.querySelector("#dvi-output").classList.add("d-none");
+    } else if (macCPUModel == "m1-m2" ) {
+      document.querySelector("#vga-output").classList.add("d-none");
+      document.querySelector("#dvi-output").classList.add("d-none");
+      document.querySelector("#usb-type-c-output").classList.add("d-none");
     }
+
 }
 
 function transitionSteps(current, next, updateNavRequired) {
@@ -788,8 +951,6 @@ function resetStepOptions(stepNum) {
     for (i = 0; i < h.length; i++) {
         h[i].classList.remove("d-none");
     }
-    //document.querySelector("#m1-alert").classList.add("d-none");
-    //document.querySelector("#dl-app-alert").classList.add("d-none");
 }
 
 function back() {
@@ -816,7 +977,7 @@ function back() {
         // Enable disabled elements
         document.querySelectorAll('[disabled]').forEach(el => el.disabled = false);
         document.querySelectorAll('.disabled').forEach(el => el.classList.remove('disabled'));
-        document.querySelectorAll('.d-none').forEach(el => el.classList.remove('d-none'));
+        document.querySelector('.step-3').querySelectorAll('.d-none').forEach(el => el.classList.remove('d-none'));
         // Remove the selected card class if exists
         const selectedCard = document.querySelector(".selectedCard");
         if (selectedCard) {
@@ -849,6 +1010,7 @@ async function displayResults() {
     //let jsonDataSrc = "https://media.plugable.com/dockfinder/data.json";
     let jsonDataSrc = "https://d2k3ryp93mcqg.cloudfront.net/dockfinder/data.json";
     let data = await getData(jsonDataSrc);
+    document.querySelector('.loader').classList.add("d-none");
     transitionSteps("step-3", "step-4", false);
     let compatibleDockList = [];
     
