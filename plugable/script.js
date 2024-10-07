@@ -1046,7 +1046,7 @@ function createProductCards(products, compatibleDockList) {
             cardDiv.className = 'card';
             
             const cardLink = document.createElement('a');
-            cardLink.href = `/products/${product.sku}`;
+            cardLink.href = `https://plugable.com/products/${product.sku}`;
             
             const cardImageDiv = document.createElement('div');
             cardImageDiv.className = 'prod-card-img-container position-relative';
