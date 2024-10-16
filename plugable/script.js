@@ -256,6 +256,7 @@ var alternativeCSS = `
   grid-template-columns: 5% 30% 30% 30% 5%;
   border-bottom: #505759 solid 1px;
   text-align: center;
+  padding-bottom: 1rem;
 }
 
 .card {
@@ -392,7 +393,7 @@ button svg {
     content: '';
     display: block;
     position: relative;
-    top: 0%;
+    top: 35%;
     width: 16%;
     left: 42%;
     border-top: 3px solid #006341;
@@ -1020,17 +1021,23 @@ async function displayResults() {
     let values = step1Values.concat(step2Values, step3Values);
 
     data.products.forEach(product => {
-        // Reformat tags to replace whitespace with hyphens, and remove parantheses
+        // Reformat tags to replace whitespace with hyphens, and remove parentheses
         let newTags = product.tags.map(function(e) {
             return e.replace(/[\s\.]/g, "-").replace(/[\(\)]/g, "").toLowerCase();
-        })
+        });
+    
         // Check if all values in the "values" array are in the "tags" array of the product
         const allValuesPresent = values.every(value => newTags.includes(value) && !newTags.includes('hide'));
-        // If all values are present, add the SKU to the compatibleDockList
-        if (allValuesPresent) {
+    
+        // Check if only one of the conditions is true, but not both
+        const xorCondition = (os != "macos") || ((os == "macos" && !newTags.includes('mst')));
+        
+        // If all values are present, and the xorCondition is satisfied, add the SKU to the compatibleDockList
+        if (allValuesPresent && xorCondition) {
             compatibleDockList.push(product.sku);
         }
     });
+
     console.log(values);
     createProductCards(data.products, compatibleDockList);
 }
