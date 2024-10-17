@@ -1,188 +1,3 @@
-// Define the HTML content to be injected
-var htmlContent = `
-<div class="container">
-<h1>Docking Station Finder</h1>
-    <h2 class="text-center">Connect <u>This</u> With <em>That</em>.</h2>
-    <div class="steps">
-        <div>
-            <span id="back" class="d-none" onclick="back()">Back</span>
-        </div>
-        <div class="nav-step-1 active-step">Step 1</div>
-        <div class="nav-step-2 nav-step-2a disabled">Step 2</div>
-        <div class="nav-step-3 disabled">Step 3</div>
-        <div></div>
-    </div>
-    <div class="step-1 active">
-        <p>Let's start with your computer. Which operating system are you using?</p>
-        <div class="card-grid">
-            <div class="card rounded text-center">
-                <div onclick="selectOS('windows')">
-                <p class="fw-bolder pb-2">Windows</p>
-                </div>
-            </div>
-            <div class="card rounded text-center">
-                <div onclick="selectOS('macos')">
-                <p class="fw-bolder pb-2">macOS</p>
-                </div>
-            </div>
-            <div class="card rounded text-center">
-                <div onclick="selectOS('chromeos')">
-                <p class="fw-bolder pb-2">ChromeOS</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="step-2">
-        <p>Next, which port are you connecting to?</p>
-        <div class="card-grid">
-            <div class="card rounded text-center">
-                <div onclick="selectHostType('usb-type-a-to-host')">
-                    <i class="fa-4x fac fa-custom-usb3 my-5"></i>
-                    <p class="fw-bolder pb-2">USB 3.0</p>
-                </div>
-            </div>
-            <div class="card rounded text-center">
-                <div onclick="selectHostType('usb-type-c-to-host')">
-                    <i class="fa-4x fac fa-custom-usbc my-5"></i>
-                    <p class="fw-bolder pb-2">USB-C</p>
-                </div>
-            </div>
-            <div class="card rounded text-center">
-                <div onclick="selectHostType('thunderbolt-to-host')">
-                    <i class="fa-4x fac fa-custom-tbt3 my-5"></i>
-                    <p class="fw-bolder pb-2">Thunderbolt/USB4</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="step-2a">
-        <p>Since you're running macOS, can you tell me if your Mac uses Apple silicon (M1, M2, or M3) or an Intel CPU?</p>
-        <p>
-            Not sure? You can check by clicking the <strong>Apple icon</strong> at the top-left of your screen, choose
-            <strong>About This Mac</strong>, and inspecting the <strong>Processor</strong> or
-            <strong>Chip</strong> fields, or by referring to Apple's
-            <a href="https://support.apple.com/en-us/HT211814" target="_blank">support guide</a>.
-        </p>
-        <div class="card-grid">
-            <div class="card rounded text-center">
-                <div onclick="selectMacCPU('m1-m2')">
-                <p class="fw-bolder pb-2">
-                    <span style="font-size:3rem">M1, M2, M3<br>
-                    Base</span><br>
-                    Apple Silicon
-                </p>
-                </div>
-            </div>
-            <div class="card rounded text-center">
-                <div onclick="selectMacCPU('m1-pro-max')">
-                <p class="fw-bolder pb-2">
-                    <span style="font-size:3rem">M1, M2, M3<br>
-                    <span class="mx-pro">Pro</span>/<span class="mx-max">Max</span></span><br>
-                    Apple Silicon
-                </p>
-                </div>
-            </div>
-            <div class="card rounded text-center">
-                <div onclick="selectMacCPU('intel')">
-                <p class="fw-bolder pb-2">
-                    <span style="font-size:3rem">Intel<br>
-                    Core</span><br>
-                    Pre-2020 models
-                </p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="step-3">
-        <p>
-            Almost there! Let's look at the display (monitor, TV, projector, etc.) you want to connect. Select which
-            video port you'd like to use, as well as any other display and feature preferences down below.
-        </p>
-        <div class="card-grid">
-            <div class="card rounded text-center" id="hdmi-output" onclick="selectVideoInput(this)">
-                <p class="fw-bolder pb-2">HDMI</p>
-            </div>
-            <div class="card rounded text-center" id="displayport-output" onclick="selectVideoInput(this)">
-                <p class="fw-bolder pb-2">DisplayPort (DP)</p>
-            </div>
-            <div class="card rounded text-center" id="dvi-output" onclick="selectVideoInput(this)">
-                <p class="fw-bolder pb-2">DVI</p>
-            </div>
-            <div class="card rounded text-center"id="vga-output" onclick="selectVideoInput(this)">
-                <p class="fw-bolder pb-2">VGA</p>
-            </div>
-            <div class="card rounded text-center" onclick="selectVideoInput(this)" id="usb-type-c-output">
-                <p class="fw-bolder pb-2">USB-C</p>
-            </div>
-        </div>
-        <form class="card-grid">
-            <div class="form-group">
-                <label for="displays">Number of Displays</label>
-                <select class="form-control mb-3" onchange="numDisplays(this)" id="displays">
-                <option hidden="" selected="" value="">Select number of displays</option>
-                <option value="">Any</option>
-                <option value="1x-display">1</option>
-                <option value="2x-displays">2</option>
-                <option value="3x-displays">3</option>
-                <option value="4x-displays" class="">4</option>
-                </select>
-                <label for="max-res">Maximum Resolution</label>
-                <select class="form-control" onchange="maxRes(this)" id="max-res">
-                <option hidden="" selected="" value="">Select maximum resolution desired</option>
-                <option value="">Any</option>
-                <option value="1080p">1080p</option>
-                <option value="1440p">1440p</option>
-                <option value="4k">4K</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label>Additional Features</label>
-                <div class="custom-control custom-switch">
-                <input onclick="updateFeature(this)" type="checkbox" class="custom-control-input" id="power-delivery-host-charging">
-                <label class="custom-control-label" for="power-delivery-host-charging"><i class="fas fa-fw fa-lg fa-plug"></i> Laptop Charging</label>
-                </div>
-                <div class="custom-control custom-switch">
-                <input onclick="updateFeature(this)" type="checkbox" class="custom-control-input" id="has-ethernet">
-                <label class="custom-control-label" for="has-ethernet"><i class="fac fa-fw fa-lg fa-custom-ethernet"></i> Ethernet</label>
-                </div>
-                <div class="custom-control custom-switch">
-                <input onclick="updateFeature(this)" type="checkbox" class="custom-control-input" id="has-sd-reader">
-                <label class="custom-control-label" for="has-sd-reader"><i class="fal fa-fw fa-lg fa-hdd"></i> SD Card Reader</label>
-                </div>
-                <div class="custom-control custom-switch">
-                <input type="checkbox" class="custom-control-input" id="audio">
-                <label class="custom-control-label" for="audio"><i class="fal fa-fw fa-lg fa-headphones"></i> 3.5mm Audio</label>
-                </div>
-            </div>
-            <div class="form-group">
-                <label>&nbsp;</label>
-                <div class="custom-control custom-switch">
-                <input type="checkbox" class="custom-control-input" id="usb-a">
-                <label class="custom-control-label" for="usb-a"><i class="fac fa-fw fa-lg fa-custom-usb3"></i> USB-A Ports</label>
-                </div>
-                <div class="custom-control custom-switch">
-                <input onclick="updateFeature(this)" type="checkbox" class="custom-control-input" id="has-usb-c-ports">
-                <label class="custom-control-label" for="has-usb-c-ports"><i class="fac fa-fw fa-lg fa-custom-usbc"></i> USB-C Ports</label>
-                </div>
-                <div class="custom-control custom-switch">
-                <input onclick="updateFeature(this)" type="checkbox" class="custom-control-input" id="has-thunderbolt-ports">
-                <label class="custom-control-label" for="has-thunderbolt-ports"><i class="fac fa-fw fa-lg fa-custom-tbt3"></i> Thunderbolt ports</label>
-                </div>
-            </div>
-        </form>
-        <div class="text-center">
-            <div id="results" class="btn" onclick="displayResults()"><span class="px-2">See results</span></div>
-        </div> 
-    </div>
-    <div class="step-4">
-        <div class="loader"></div> 
-        <div class="card-grid">
-            
-        </div>
-    </div>
-</div>
-`;
-
 // Define the alternative CSS
 var alternativeCSS = `
 
@@ -242,8 +57,9 @@ var alternativeCSS = `
     text-align: center;
 }
 
-.step-1, .step-2, .step-2a {
+.step-1, .step-2, .step-2a, .step-3 {
     text-align: center;
+    padding: 0 1rem 1rem 1rem;
 }
 
 .step-1 {
@@ -764,8 +580,6 @@ select[multiple].input-lg {
 
 // Function to inject HTML into the specified div
 function injectHTML() {
-  // Find the div element with id "dock-finder"
-  var dockFinderDiv = document.getElementById('dock-finder');
 
   //temp override - delete later
   var styleElement = document.createElement('style');
@@ -775,22 +589,9 @@ function injectHTML() {
 
   // Append the style element to the document head
   document.head.appendChild(styleElement);
-  
-  // Check if the div is found
-  if (dockFinderDiv) {
-    // Inject the HTML content into the div
-    dockFinderDiv.innerHTML = htmlContent;
-    // Create a style element to hold the CSS
-    var styleElement = document.createElement('style');
 
-    // Set the CSS text
-    styleElement.innerHTML = alternativeCSS;
-    
-    // Append the style element to the document head
-    document.head.appendChild(styleElement);
-  } else {
-    console.error('Div with id "dock-finder" not found.');
-  }
+  createDockingStationFinder();
+
 }
 var os = "";
 var hostType = "";
@@ -1093,3 +894,438 @@ async function getData(url) {
     const response = await fetch(url);
     return response.json();
 }
+
+function createDockingStationFinder() {
+    // Create the main container div
+    const container = document.createElement('div');
+    container.className = 'container';
+  
+    // Create and append the h1 element
+    const h1 = document.createElement('h1');
+    h1.textContent = 'Docking Station Finder';
+    container.appendChild(h1);
+  
+    // Create and append the h2 element
+    const h2 = document.createElement('h2');
+    h2.className = 'text-center';
+    h2.innerHTML = 'Connect <u>This</u> With <em>That</em>.';
+    container.appendChild(h2);
+  
+    // Create the steps navigation
+    const steps = document.createElement('div');
+    steps.className = 'steps';
+  
+    const backDiv = document.createElement('div');
+    const backSpan = document.createElement('span');
+    backSpan.id = 'back';
+    backSpan.className = 'd-none';
+    backSpan.onclick = back; // Assuming 'back' is a defined function
+    backSpan.textContent = 'Back';
+    backDiv.appendChild(backSpan);
+    steps.appendChild(backDiv);
+  
+    const navStep1 = document.createElement('div');
+    navStep1.className = 'nav-step-1 active-step';
+    navStep1.textContent = 'Step 1';
+    steps.appendChild(navStep1);
+  
+    const navStep2 = document.createElement('div');
+    navStep2.className = 'nav-step-2 nav-step-2a disabled';
+    navStep2.textContent = 'Step 2';
+    steps.appendChild(navStep2);
+  
+    const navStep3 = document.createElement('div');
+    navStep3.className = 'nav-step-3 disabled';
+    navStep3.textContent = 'Step 3';
+    steps.appendChild(navStep3);
+  
+    steps.appendChild(document.createElement('div')); // Empty div for spacing
+    container.appendChild(steps);
+  
+    // Create Step 1 section
+    const step1 = document.createElement('div');
+    step1.className = 'step-1 active';
+  
+    const step1P = document.createElement('p');
+    step1P.textContent = "Let's start with your computer. Which operating system are you using?";
+    step1.appendChild(step1P);
+  
+    const cardGrid1 = document.createElement('div');
+    cardGrid1.className = 'card-grid';
+  
+    const osOptions = [
+      { name: 'Windows', onclick: "selectOS('windows')" },
+      { name: 'macOS', onclick: "selectOS('macos')" },
+      { name: 'ChromeOS', onclick: "selectOS('chromeos')" },
+    ];
+  
+    osOptions.forEach((os) => {
+      const card = document.createElement('div');
+      card.className = 'card rounded text-center';
+  
+      const cardInner = document.createElement('div');
+      cardInner.setAttribute('onclick', os.onclick);
+  
+      const osName = document.createElement('p');
+      osName.className = 'fw-bolder pb-2';
+      osName.textContent = os.name;
+  
+      cardInner.appendChild(osName);
+      card.appendChild(cardInner);
+      cardGrid1.appendChild(card);
+    });
+  
+    step1.appendChild(cardGrid1);
+    container.appendChild(step1);
+  
+    // Create Step 2 section
+    const step2 = document.createElement('div');
+    step2.className = 'step-2';
+  
+    const step2P = document.createElement('p');
+    step2P.textContent = 'Next, which port are you connecting to?';
+    step2.appendChild(step2P);
+  
+    const cardGrid2 = document.createElement('div');
+    cardGrid2.className = 'card-grid';
+  
+    const portOptions = [
+      {
+        name: 'USB 3.0',
+        onclick: "selectHostType('usb-type-a-to-host')",
+        iconClass: 'fa-custom-usb3',
+      },
+      {
+        name: 'USB-C',
+        onclick: "selectHostType('usb-type-c-to-host')",
+        iconClass: 'fa-custom-usbc',
+      },
+      {
+        name: 'Thunderbolt/USB4',
+        onclick: "selectHostType('thunderbolt-to-host')",
+        iconClass: 'fa-custom-tbt3',
+      },
+    ];
+  
+    portOptions.forEach((port) => {
+      const card = document.createElement('div');
+      card.className = 'card rounded text-center';
+  
+      const cardInner = document.createElement('div');
+      cardInner.setAttribute('onclick', port.onclick);
+  
+      const icon = document.createElement('i');
+      icon.className = `fa-4x fac ${port.iconClass} my-5`;
+      cardInner.appendChild(icon);
+  
+      const portName = document.createElement('p');
+      portName.className = 'fw-bolder pb-2';
+      portName.textContent = port.name;
+  
+      cardInner.appendChild(portName);
+      card.appendChild(cardInner);
+      cardGrid2.appendChild(card);
+    });
+  
+    step2.appendChild(cardGrid2);
+    container.appendChild(step2);
+  
+    // Create Step 2a section
+    const step2a = document.createElement('div');
+    step2a.className = 'step-2a';
+  
+    const step2aP1 = document.createElement('p');
+    step2aP1.textContent =
+      "Since you're running macOS, can you tell me if your Mac uses Apple silicon (M1, M2, or M3) or an Intel CPU?";
+    step2a.appendChild(step2aP1);
+  
+    const step2aP2 = document.createElement('p');
+    step2aP2.innerHTML =
+      'Not sure? You can check by clicking the <strong>Apple icon</strong> at the top-left of your screen, choose <strong>About This Mac</strong>, and inspecting the <strong>Processor</strong> or <strong>Chip</strong> fields, or by referring to Apple\'s <a href="https://support.apple.com/en-us/HT211814" target="_blank">support guide</a>.';
+    step2a.appendChild(step2aP2);
+  
+    const cardGrid2a = document.createElement('div');
+    cardGrid2a.className = 'card-grid';
+  
+    const cpuOptions = [
+      {
+        onclick: "selectMacCPU('m1-m2')",
+        content:
+          '<p class="fw-bolder pb-2"><span style="font-size:3rem">M1, M2, M3<br>Base</span><br>Apple Silicon</p>',
+      },
+      {
+        onclick: "selectMacCPU('m1-pro-max')",
+        content:
+          '<p class="fw-bolder pb-2"><span style="font-size:3rem">M1, M2, M3<br><span class="mx-pro">Pro</span>/<span class="mx-max">Max</span></span><br>Apple Silicon</p>',
+      },
+      {
+        onclick: "selectMacCPU('intel')",
+        content:
+          '<p class="fw-bolder pb-2"><span style="font-size:3rem">Intel<br>Core</span><br>Pre-2020 models</p>',
+      },
+    ];
+  
+    cpuOptions.forEach((cpu) => {
+      const card = document.createElement('div');
+      card.className = 'card rounded text-center';
+  
+      const cardInner = document.createElement('div');
+      cardInner.setAttribute('onclick', cpu.onclick);
+      cardInner.innerHTML = cpu.content;
+  
+      card.appendChild(cardInner);
+      cardGrid2a.appendChild(card);
+    });
+  
+    step2a.appendChild(cardGrid2a);
+    container.appendChild(step2a);
+  
+    // Create Step 3 section
+    const step3 = document.createElement('div');
+    step3.className = 'step-3';
+  
+    const step3P = document.createElement('p');
+    step3P.innerHTML =
+      "Almost there! Let's look at the display (monitor, TV, projector, etc.) you want to connect. Select which video port you'd like to use, as well as any other display and feature preferences down below.";
+    step3.appendChild(step3P);
+  
+    const cardGrid3 = document.createElement('div');
+    cardGrid3.className = 'card-grid';
+  
+    const videoOptions = [
+      { id: 'hdmi-output', name: 'HDMI' },
+      { id: 'displayport-output', name: 'DisplayPort (DP)' },
+      { id: 'dvi-output', name: 'DVI' },
+      { id: 'vga-output', name: 'VGA' },
+      { id: 'usb-type-c-output', name: 'USB-C' },
+    ];
+  
+    videoOptions.forEach((video) => {
+      const card = document.createElement('div');
+      card.className = 'card rounded text-center';
+      card.id = video.id;
+      card.setAttribute('onclick', 'selectVideoInput(this)');
+  
+      const videoName = document.createElement('p');
+      videoName.className = 'fw-bolder pb-2';
+      videoName.textContent = video.name;
+  
+      card.appendChild(videoName);
+      cardGrid3.appendChild(card);
+    });
+  
+    step3.appendChild(cardGrid3);
+  
+    // Create the form
+    const form = document.createElement('form');
+    form.className = 'card-grid';
+  
+    // Form Group 1
+    const formGroup1 = document.createElement('div');
+    formGroup1.className = 'form-group';
+  
+    const labelDisplays = document.createElement('label');
+    labelDisplays.setAttribute('for', 'displays');
+    labelDisplays.textContent = 'Number of Displays';
+    formGroup1.appendChild(labelDisplays);
+  
+    const selectDisplays = document.createElement('select');
+    selectDisplays.className = 'form-control mb-3';
+    selectDisplays.id = 'displays';
+    selectDisplays.setAttribute('onchange', 'numDisplays(this)');
+  
+    const displayOptions = [
+      { value: '', text: 'Select number of displays', hidden: true, selected: true },
+      { value: '', text: 'Any' },
+      { value: '1x-display', text: '1' },
+      { value: '2x-displays', text: '2' },
+      { value: '3x-displays', text: '3' },
+      { value: '4x-displays', text: '4' },
+    ];
+  
+    displayOptions.forEach((opt) => {
+      const option = document.createElement('option');
+      option.value = opt.value;
+      option.textContent = opt.text;
+      if (opt.hidden) option.hidden = true;
+      if (opt.selected) option.selected = true;
+      selectDisplays.appendChild(option);
+    });
+  
+    formGroup1.appendChild(selectDisplays);
+  
+    const labelRes = document.createElement('label');
+    labelRes.setAttribute('for', 'max-res');
+    labelRes.textContent = 'Maximum Resolution';
+    formGroup1.appendChild(labelRes);
+  
+    const selectRes = document.createElement('select');
+    selectRes.className = 'form-control';
+    selectRes.id = 'max-res';
+    selectRes.setAttribute('onchange', 'maxRes(this)');
+  
+    const resOptions = [
+      { value: '', text: 'Select maximum resolution desired', hidden: true, selected: true },
+      { value: '', text: 'Any' },
+      { value: '1080p', text: '1080p' },
+      { value: '1440p', text: '1440p' },
+      { value: '4k', text: '4K' },
+    ];
+  
+    resOptions.forEach((opt) => {
+      const option = document.createElement('option');
+      option.value = opt.value;
+      option.textContent = opt.text;
+      if (opt.hidden) option.hidden = true;
+      if (opt.selected) option.selected = true;
+      selectRes.appendChild(option);
+    });
+  
+    formGroup1.appendChild(selectRes);
+    form.appendChild(formGroup1);
+  
+    // Form Group 2 - Additional Features
+    const formGroup2 = document.createElement('div');
+    formGroup2.className = 'form-group';
+  
+    const labelFeatures = document.createElement('label');
+    labelFeatures.textContent = 'Additional Features';
+    formGroup2.appendChild(labelFeatures);
+  
+    const features = [
+      {
+        id: 'power-delivery-host-charging',
+        label: '<i class="fas fa-fw fa-lg fa-plug"></i> Laptop Charging',
+        onclick: 'updateFeature(this)',
+      },
+      {
+        id: 'has-ethernet',
+        label: '<i class="fac fa-fw fa-lg fa-custom-ethernet"></i> Ethernet',
+        onclick: 'updateFeature(this)',
+      },
+      {
+        id: 'has-sd-reader',
+        label: '<i class="fal fa-fw fa-lg fa-hdd"></i> SD Card Reader',
+        onclick: 'updateFeature(this)',
+      },
+      {
+        id: 'audio',
+        label: '<i class="fal fa-fw fa-lg fa-headphones"></i> 3.5mm Audio',
+      },
+    ];
+  
+    features.forEach((feature) => {
+      const switchDiv = document.createElement('div');
+      switchDiv.className = 'custom-control custom-switch';
+  
+      const input = document.createElement('input');
+      input.type = 'checkbox';
+      input.className = 'custom-control-input';
+      input.id = feature.id;
+      if (feature.onclick) input.setAttribute('onclick', feature.onclick);
+  
+      const label = document.createElement('label');
+      label.className = 'custom-control-label';
+      label.setAttribute('for', feature.id);
+      label.innerHTML = feature.label;
+  
+      switchDiv.appendChild(input);
+      switchDiv.appendChild(label);
+      formGroup2.appendChild(switchDiv);
+    });
+  
+    form.appendChild(formGroup2);
+  
+    // Form Group 3 - Additional Ports
+    const formGroup3 = document.createElement('div');
+    formGroup3.className = 'form-group';
+  
+    const labelSpacer = document.createElement('label');
+    labelSpacer.innerHTML = '&nbsp;';
+    formGroup3.appendChild(labelSpacer);
+  
+    const ports = [
+      {
+        id: 'usb-a',
+        label: '<i class="fac fa-fw fa-lg fa-custom-usb3"></i> USB-A Ports',
+      },
+      {
+        id: 'has-usb-c-ports',
+        label: '<i class="fac fa-fw fa-lg fa-custom-usbc"></i> USB-C Ports',
+        onclick: 'updateFeature(this)',
+      },
+      {
+        id: 'has-thunderbolt-ports',
+        label: '<i class="fac fa-fw fa-lg fa-custom-tbt3"></i> Thunderbolt ports',
+        onclick: 'updateFeature(this)',
+      },
+    ];
+  
+    ports.forEach((port) => {
+      const switchDiv = document.createElement('div');
+      switchDiv.className = 'custom-control custom-switch';
+  
+      const input = document.createElement('input');
+      input.type = 'checkbox';
+      input.className = 'custom-control-input';
+      input.id = port.id;
+      if (port.onclick) input.setAttribute('onclick', port.onclick);
+  
+      const label = document.createElement('label');
+      label.className = 'custom-control-label';
+      label.setAttribute('for', port.id);
+      label.innerHTML = port.label;
+  
+      switchDiv.appendChild(input);
+      switchDiv.appendChild(label);
+      formGroup3.appendChild(switchDiv);
+    });
+  
+    form.appendChild(formGroup3);
+    step3.appendChild(form);
+  
+    // Create the results button
+    const resultsDiv = document.createElement('div');
+    resultsDiv.className = 'text-center';
+  
+    const resultsBtn = document.createElement('div');
+    resultsBtn.id = 'results';
+    resultsBtn.className = 'btn';
+    resultsBtn.setAttribute('onclick', 'displayResults()');
+  
+    const resultsSpan = document.createElement('span');
+    resultsSpan.className = 'px-2';
+    resultsSpan.textContent = 'See results';
+  
+    resultsBtn.appendChild(resultsSpan);
+    resultsDiv.appendChild(resultsBtn);
+    step3.appendChild(resultsDiv);
+  
+    container.appendChild(step3);
+  
+    // Create Step 4 section
+    const step4 = document.createElement('div');
+    step4.className = 'step-4';
+  
+    const loader = document.createElement('div');
+    loader.className = 'loader';
+    step4.appendChild(loader);
+  
+    const cardGrid4 = document.createElement('div');
+    cardGrid4.className = 'card-grid';
+    step4.appendChild(cardGrid4);
+  
+    container.appendChild(step4);
+
+    // Find the div element with id "dock-finder"
+    var dockFinderDiv = document.getElementById('dock-finder');
+
+    // Check if the div is found
+    if (dockFinderDiv) {
+        // Inject the HTML content into the div
+        dockFinderDiv.appendChild(container);
+    } else {
+        console.error('Div with id "dock-finder" not found.');
+    }
+  }
+  
